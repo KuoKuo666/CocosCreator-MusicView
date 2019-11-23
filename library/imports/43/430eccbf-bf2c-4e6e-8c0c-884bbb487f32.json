@@ -1,0 +1,183 @@
+{
+  "__type__": "cc.EffectAsset",
+  "_name": "__builtin-editor-gizmo-line",
+  "_objFlags": 0,
+  "_native": "",
+  "properties": null,
+  "techniques": [
+    {
+      "stages": [
+        "transparent"
+      ],
+      "passes": [
+        {
+          "blendState": {
+            "targets": [
+              {
+                "blend": true,
+                "blendEq": 32774,
+                "blendSrc": 770,
+                "blendDst": 1
+              }
+            ]
+          },
+          "rasterizerState": {
+            "cullMode": 0
+          },
+          "program": "__builtin-editor-gizmo-line|gizmo-line-vs|gizmo-line-fs:front",
+          "depthStencilState": {
+            "depthTest": true
+          },
+          "properties": {
+            "diffuseColor": {
+              "value": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            }
+          }
+        },
+        {
+          "blendState": {
+            "targets": [
+              {
+                "blend": true,
+                "blendEq": 32774,
+                "blendSrc": 770,
+                "blendDst": 1
+              }
+            ]
+          },
+          "rasterizerState": {
+            "cullMode": 0
+          },
+          "program": "__builtin-editor-gizmo-line|gizmo-line-vs|gizmo-line-fs:back",
+          "depthStencilState": {
+            "depthTest": true,
+            "depthFunc": 516
+          },
+          "properties": {
+            "diffuseColor": {
+              "value": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "inspector": {
+                "type": "color"
+              },
+              "type": 16
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "shaders": [
+    {
+      "hash": 1100767444,
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n\n  vec4 cc_screenSize;\n\n  vec4 cc_screenScale;\n\n  vec4 cc_nativeSize;\n\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n\n  vec4 cc_exposure;\n\n  vec4 cc_mainLitDir;\n\n  vec4 cc_mainLitColor;\n\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\nuniform CCLocal {\n  mat4 cc_matWorld;\n  mat4 cc_matWorldIT;\n};\n\nattribute vec3 a_position;\n\nvoid main () {\n  gl_Position = cc_matViewProj * cc_matWorld * vec4(a_position, 1);\n  gl_Position.z -= 0.0001;\n}\n",
+        "frag": "\nprecision highp float;\n\nvec3 gammaToLinearSpaceRGB(in vec3 sRGB) {\n\n  return sRGB * (sRGB * (sRGB * 0.305306011 + 0.682171111) + 0.012522878);\n}\n\nvec3 linearToGammaSpaceRGB(in vec3 RGB) {\n\n  vec3 S1 = sqrt(RGB);\n  vec3 S2 = sqrt(S1);\n  vec3 S3 = sqrt(S2);\n  return 0.585122381 * S1 + 0.783140355 * S2 - 0.368262736 * S3;\n}\n\nvec4 gammaToLinearSpaceRGBA(in vec4 sRGBA) {\n  return vec4(gammaToLinearSpaceRGB(sRGBA.rgb), sRGBA.a);\n}\n\nvec4 linearToGammaSpaceRGBA(in vec4 RGBA) {\n  return vec4(linearToGammaSpaceRGB(RGBA.rgb), RGBA.a);\n}\n\nvec4 linearToLinear (in vec4 value) {\n  return value;\n}\n\nuniform DIFFUSE_COLOR {\n  vec4 diffuseColor;\n}\n\nvec4 front() {\n  return linearToLinear(diffuseColor);\n}\nvec4 back() {\n  return linearToLinear(vec4(diffuseColor.rgb, diffuseColor.a * 0.2));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = front(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform mat4 cc_matViewProj;\nuniform mat4 cc_matWorld;\n\nattribute vec3 a_position;\n\nvoid main () {\n  gl_Position = cc_matViewProj * cc_matWorld * vec4(a_position, 1);\n  gl_Position.z -= 0.0001;\n}\n",
+        "frag": "\nprecision highp float;\n\nvec3 gammaToLinearSpaceRGB(in vec3 sRGB) {\n\n  return sRGB * (sRGB * (sRGB * 0.305306011 + 0.682171111) + 0.012522878);\n}\n\nvec3 linearToGammaSpaceRGB(in vec3 RGB) {\n\n  vec3 S1 = sqrt(RGB);\n  vec3 S2 = sqrt(S1);\n  vec3 S3 = sqrt(S2);\n  return 0.585122381 * S1 + 0.783140355 * S2 - 0.368262736 * S3;\n}\n\nvec4 gammaToLinearSpaceRGBA(in vec4 sRGBA) {\n  return vec4(gammaToLinearSpaceRGB(sRGBA.rgb), sRGBA.a);\n}\n\nvec4 linearToGammaSpaceRGBA(in vec4 RGBA) {\n  return vec4(linearToGammaSpaceRGB(RGBA.rgb), RGBA.a);\n}\n\nvec4 linearToLinear (in vec4 value) {\n  return value;\n}\n\nuniform vec4 diffuseColor;\nvec4 front() {\n  return linearToLinear(diffuseColor);\n}\nvec4 back() {\n  return linearToLinear(vec4(diffuseColor.rgb, diffuseColor.a * 0.2));\n}\n\nvoid main() { gl_FragColor = front(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        }
+      },
+      "defines": [],
+      "blocks": [
+        {
+          "name": "DIFFUSE_COLOR",
+          "members": [
+            {
+              "name": "diffuseColor",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        }
+      ],
+      "samplers": [],
+      "dependencies": {},
+      "name": "__builtin-editor-gizmo-line|gizmo-line-vs|gizmo-line-fs:front"
+    },
+    {
+      "hash": 2636023818,
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n\n  vec4 cc_screenSize;\n\n  vec4 cc_screenScale;\n\n  vec4 cc_nativeSize;\n\n  mat4 cc_matView;\n  mat4 cc_matViewInv;\n  mat4 cc_matProj;\n  mat4 cc_matProjInv;\n  mat4 cc_matViewProj;\n  mat4 cc_matViewProjInv;\n  vec4 cc_cameraPos;\n\n  vec4 cc_exposure;\n\n  vec4 cc_mainLitDir;\n\n  vec4 cc_mainLitColor;\n\n  vec4 cc_ambientSky;\n  vec4 cc_ambientGround;\n};\nuniform CCLocal {\n  mat4 cc_matWorld;\n  mat4 cc_matWorldIT;\n};\n\nattribute vec3 a_position;\n\nvoid main () {\n  gl_Position = cc_matViewProj * cc_matWorld * vec4(a_position, 1);\n  gl_Position.z -= 0.0001;\n}\n",
+        "frag": "\nprecision highp float;\n\nvec3 gammaToLinearSpaceRGB(in vec3 sRGB) {\n\n  return sRGB * (sRGB * (sRGB * 0.305306011 + 0.682171111) + 0.012522878);\n}\n\nvec3 linearToGammaSpaceRGB(in vec3 RGB) {\n\n  vec3 S1 = sqrt(RGB);\n  vec3 S2 = sqrt(S1);\n  vec3 S3 = sqrt(S2);\n  return 0.585122381 * S1 + 0.783140355 * S2 - 0.368262736 * S3;\n}\n\nvec4 gammaToLinearSpaceRGBA(in vec4 sRGBA) {\n  return vec4(gammaToLinearSpaceRGB(sRGBA.rgb), sRGBA.a);\n}\n\nvec4 linearToGammaSpaceRGBA(in vec4 RGBA) {\n  return vec4(linearToGammaSpaceRGB(RGBA.rgb), RGBA.a);\n}\n\nvec4 linearToLinear (in vec4 value) {\n  return value;\n}\n\nuniform DIFFUSE_COLOR {\n  vec4 diffuseColor;\n}\n\nvec4 front() {\n  return linearToLinear(diffuseColor);\n}\nvec4 back() {\n  return linearToLinear(vec4(diffuseColor.rgb, diffuseColor.a * 0.2));\n}\n\nout vec4 cc_FragColor;\nvoid main() { cc_FragColor = back(); }\n"
+      },
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform mat4 cc_matViewProj;\nuniform mat4 cc_matWorld;\n\nattribute vec3 a_position;\n\nvoid main () {\n  gl_Position = cc_matViewProj * cc_matWorld * vec4(a_position, 1);\n  gl_Position.z -= 0.0001;\n}\n",
+        "frag": "\nprecision highp float;\n\nvec3 gammaToLinearSpaceRGB(in vec3 sRGB) {\n\n  return sRGB * (sRGB * (sRGB * 0.305306011 + 0.682171111) + 0.012522878);\n}\n\nvec3 linearToGammaSpaceRGB(in vec3 RGB) {\n\n  vec3 S1 = sqrt(RGB);\n  vec3 S2 = sqrt(S1);\n  vec3 S3 = sqrt(S2);\n  return 0.585122381 * S1 + 0.783140355 * S2 - 0.368262736 * S3;\n}\n\nvec4 gammaToLinearSpaceRGBA(in vec4 sRGBA) {\n  return vec4(gammaToLinearSpaceRGB(sRGBA.rgb), sRGBA.a);\n}\n\nvec4 linearToGammaSpaceRGBA(in vec4 RGBA) {\n  return vec4(linearToGammaSpaceRGB(RGBA.rgb), RGBA.a);\n}\n\nvec4 linearToLinear (in vec4 value) {\n  return value;\n}\n\nuniform vec4 diffuseColor;\nvec4 front() {\n  return linearToLinear(diffuseColor);\n}\nvec4 back() {\n  return linearToLinear(vec4(diffuseColor.rgb, diffuseColor.a * 0.2));\n}\n\nvoid main() { gl_FragColor = back(); }\n"
+      },
+      "builtins": {
+        "globals": {
+          "blocks": [
+            {
+              "name": "CCGlobal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        },
+        "locals": {
+          "blocks": [
+            {
+              "name": "CCLocal",
+              "defines": []
+            }
+          ],
+          "samplers": []
+        }
+      },
+      "defines": [],
+      "blocks": [
+        {
+          "name": "DIFFUSE_COLOR",
+          "members": [
+            {
+              "name": "diffuseColor",
+              "type": 16,
+              "count": 1
+            }
+          ],
+          "defines": [],
+          "binding": 0
+        }
+      ],
+      "samplers": [],
+      "dependencies": {},
+      "name": "__builtin-editor-gizmo-line|gizmo-line-vs|gizmo-line-fs:back"
+    }
+  ]
+}

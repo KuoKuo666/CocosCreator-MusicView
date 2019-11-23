@@ -1,0 +1,89 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": 200,
+      "y": 165,
+      "width": 1280,
+      "height": 720,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 300,
+                "type": "panel",
+                "width": 204
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 336,
+                "type": "panel",
+                "width": 204
+              }
+            ],
+            "height": 639,
+            "type": "dock-v",
+            "width": 204
+          },
+          {
+            "active": 0,
+            "children": [
+              "scene"
+            ],
+            "height": 639,
+            "type": "panel",
+            "width": 654
+          },
+          {
+            "active": 0,
+            "children": [
+              "inspector",
+              "cocos-services"
+            ],
+            "height": 639,
+            "type": "panel",
+            "width": 416
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "hierarchy",
+        "assets",
+        "scene",
+        "inspector",
+        "cocos-services"
+      ]
+    },
+    "worker": {}
+  },
+  "panels": {
+    "console": {
+      "x": 640,
+      "y": 326,
+      "width": 404,
+      "height": 322
+    },
+    "sprite-editor": {
+      "x": 590,
+      "y": 226,
+      "width": 500,
+      "height": 522
+    }
+  },
+  "panelLabelWidth": {
+    "inspector": null
+  },
+  "panelLabelWidth.inspector": null
+}
