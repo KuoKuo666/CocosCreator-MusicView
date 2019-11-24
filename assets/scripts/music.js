@@ -12,6 +12,7 @@ cc.Class({
     },
 
     onLoad () {
+        console.log(this.music);
         // 实例化 item
         for (let i = 0; i < 40; i++) {
             let item = cc.instantiate(this.item);
