@@ -68,7 +68,9 @@ cc.Class({
         for (var i = 0; i < 40; i++) {
             var h = dataArray[i * 3] * 1.5;
             if (h < 5) h = 5;
-            this.mgr.children[i].height = h;
+            // this.mgr.children[i].height = h;
+            var node = this.mgr.children[i];
+            node.height = cc.misc.lerp(node.height, h, 0.4);
         }
     }
 });
