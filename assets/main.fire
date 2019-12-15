@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        515.2850952148438,
+        515.285115251741,
         0,
         0,
         0,
@@ -233,6 +233,7 @@
       "height": 1
     },
     "_renderStages": 1,
+    "_alignWithScreen": true,
     "_id": "59+hX9XV1FT7t+HC1vmTMi"
   },
   {
@@ -378,7 +379,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -434,6 +435,8 @@
       "__id__": 7
     },
     "_enabled": true,
+    "_normalMaterial": null,
+    "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 0.9,
     "clickEvents": [

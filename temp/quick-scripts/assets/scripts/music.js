@@ -70,6 +70,7 @@ cc.Class({
             if (h < 5) h = 5;
             // this.mgr.children[i].height = h;
             var node = this.mgr.children[i];
+            // 插值，不那么生硬
             node.height = cc.misc.lerp(node.height, h, 0.4);
         }
     }

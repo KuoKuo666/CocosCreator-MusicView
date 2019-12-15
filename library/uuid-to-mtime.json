@@ -440,8 +440,8 @@
     "relativePath": "model/primitives.fbx"
   },
   "8018dbc2-d3d1-45f0-8e5a-2229361d765b": {
-    "asset": 1576377337222,
-    "meta": 1576377337224,
+    "asset": 1576377635582,
+    "meta": 1576377635587,
     "relativePath": "main.fire"
   },
   "718d1c41-ad19-4cb1-b1ad-4042e465282a": {
@@ -490,8 +490,8 @@
     "relativePath": "effects/builtin-toon.effect"
   },
   "dda42fe8-6e43-4582-81e3-8ba00462e5fb": {
-    "asset": 1576377494140,
-    "meta": 1576377495819,
+    "asset": 1576377633239,
+    "meta": 1576377634284,
     "relativePath": "scripts/music.js"
   }
 }
